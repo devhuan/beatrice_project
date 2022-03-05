@@ -1,52 +1,48 @@
 <div class="header-container">
 	<div class="header">
 		<div class="for-full-withmenu">
-				<div class="col-logo"><?php echo $this->getChildHtml("logo"); ?></div>
-				<?php echo $this->getChildHtml("top.navigation.sections"); ?>	
+            <div class="col-custommenu">
+                <div class="custommenu-navigation">
+			        <?php echo $this->getChildHtml("top.navigation.sections"); ?>
+                </div>
+                <div class="custommenu-toggle">
+                    <div class="custommenu-title"><?php echo __('Menu');?></div>
+                    <div class="toggle-icon">
+                        <div class="toggle one"></div>
+                        <div class="toggle two"></div>
+                        <div class="toggle three"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-logo"><?php echo $this->getChildHtml("logo"); ?></div>
 			<div class="actions-header">				
-				<div class="register-login hidden-xs">
+                <?php echo $this->getChildHtml("currency"); ?>		
+				<?php echo $this->getChildHtml("topSearch"); ?>	
+				<div class="wishlist hidden-xs">
+					<a href="<?php echo $this->getUrl('wishlist');?>"><i class="icon-heart"></i></a>
+				</div>		
+                <div class="register-login hidden-xs">
 					<?php if(!$this->helper('Rokanthemes\Themeoption\Helper\Data')->isLoggedIn()){?>
 						<a href="<?php echo $this->getUrl('customer/account/login');?>"><i class="icon-users"></i><?php echo __('Login');?></a>
-						<a href="<?php echo $this->getUrl('customer/account/create');?>"> / <?php echo __('Sign up');?></a>
 					<?php
 					}
 					else{
 					?>
 					<a href="<?php echo $this->getUrl('customer/account/index');?>"><i class="icon-users"></i><?php echo __('My account');?></a>
-					<a href="<?php echo $this->getUrl('customer/account/logout');?>"> / <?php echo __('Logout');?></a>
 					<?php } ?>
 				</div>
-				<?php echo $this->getChildHtml("topSearch"); ?>	
-				<div class="wishlist hidden-xs">
-					<a href="<?php echo $this->getUrl('wishlist');?>"><i class="icon-heart"></i></a>
-				</div>		
 				<?php echo $this->getChildHtml("minicart");?>
-				<div class="header-top-setting">
-					<a href="#" class="actions-top"><i class="icon-align-right"> </i></a>
-					<div class="setting-container">
-						<div class="container-setting-language-currency">
-							<button type="button" id="btn-h-t-s-close" title="<?php echo __('Close') ?>">
-								<span><?php echo __('Close') ?></span>
-							</button>
-							<h3><?php echo __('Language') ?></h3>
-							<?php echo $this->getChildHtml("store_language"); ?>
-							<h3><?php echo __('Currency') ?></h3>
-							<?php echo $this->getChildHtml("currency"); ?>
-						</div>
-					</div>
-				</div>				
 			</div>
 		</div>
 	</div>
 </div>
-<?php if($this->helper('Rokanthemes\Themeoption\Helper\Themeconfig')->isEnableStickyHeader()){ ?>
 <script type="text/javascript">
     require(['jquery'],function($){
         $(document).ready(function($){
+            <?php if($this->helper('Rokanthemes\Themeoption\Helper\Themeconfig')->isEnableStickyHeader()){ ?>
 			$(window).scroll(function() {
 				var num = $('.header-container').outerHeight();
 				var screenWidth = $(window).width();
-				
 				if ($(this).scrollTop() > num && screenWidth >= 768 ){  
 					$(".header").addClass("sticky");
 				}
@@ -54,7 +50,14 @@
 					$(".header").removeClass("sticky");
 				}
 			});
+            <?php } ?>
+            $(document).on("click",".col-custommenu .toggle-icon",function() {
+                if ($('.col-custommenu').hasClass('active')) {
+                    $('.col-custommenu').removeClass('active');
+                }else{
+                    $('.col-custommenu').addClass('active');
+                }
+            });
 		});
     });
 </script>
-<?php } ?>

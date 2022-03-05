@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+		<css src="Blueskytechco_CustomCatalog::css/default-skin/default-skin.css" /> 
+		<css src="Blueskytechco_CustomCatalog::css/photoswipe.css" />
+    </head>
+    <body>
+        <referenceContainer name="before.body.end">
+			<block class="Magento\Framework\View\Element\Template" template="Blueskytechco_CustomCatalog::components/photoswipe.phtml" name="photoswipe.components" after="-"/>
+		</referenceContainer>
+		<referenceBlock name="product.info.media.image">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Blueskytechco_CustomCatalog::product/view/gallery_layout1.phtml</argument>
+            </action>
+            <arguments>
+                <argument name="view_model" xsi:type="object">Blueskytechco\CustomCatalog\ViewModel\Catalog</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="product.info.details">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Blueskytechco_CustomCatalog::product/view/details_tab_accordions2.phtml</argument>
+            </action>
+        </referenceBlock>
+        <move element="product.info.details" destination="product.info.main" after="-"/> 
+	</body>
+</page>

@@ -1,0 +1,73 @@
+<?php
+/**
+ * Custom Catalog for store
+ *
+ * @var $viewModel \Blueskytechco\CustomCatalog\ViewModel\Catalog
+ */
+?>
+<?php
+    $gallery_images = $block->getGalleryImages();
+    $options = json_decode($block->getGalleryOptions()->getOptionsJson(), true);
+    $width  = (isset($options['width']) && $options['width'])?$options['width']:'';
+    $height  = (isset($options['height']) && $options['height'])?$options['height']:'';
+	$_product = $block->getProduct();
+    $view_model = $block->getViewModel();
+    $image_helper = $view_model->getImageHelper();
+    $add_class = '';
+    $col_thumb = true;
+    $vertical_thumb = "true";
+    $show_item = 6;
+    
+    $zoom = 1;
+    $zoom_action = true;
+    $zoom_type = 1;
+?>
+<div class="thumb_none">
+    <div class="col-gallery-custom">
+        <div id="gallery-images" class="gallery-images slick-slider" 
+            data-slick='{"slidesToShow": 2,"slidesToScroll": 2,"rows": 1,"infinite": false,"autoplay": false,"autoplaySpeed": false,"dots": false}'>
+            <?php foreach($gallery_images as $image): ?>
+                <?php if ($image->getData('video_url') && $view_model->getVideoUrl($image->getData('video_url'))) { ?>
+                <div class="product-image gallery-video" style="padding-top: <?= ($height/$width*100) ?>%;">
+                    <iframe frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen="allowfullscreen" class="media-video"
+                        src="<?= $view_model->getVideoUrl($image->getData('video_url')) ?>"
+                        title="<?= $_product->getName() ?>" style="width: 100%;position: absolute;top: 0;bottom: 0;height: 100%;"></iframe>
+                </div>
+                <?php } else { ?>
+                <div class="product-image product-image-photoswipe">
+                    <div class="gallery-img" data-width="<?= $width ?>" data-height="<?= $height ?>"
+                        data-mdid="<?= $image->getValueId() ?>" data-src="<?= $image->getData('medium_image_url'); ?>"
+                        data-bgset="<?= $image->getData('medium_image_url'); ?>"
+                        >
+                        <img class="product-image" src="<?= $image->getData('medium_image_url'); ?>" alt="<?= $_product->getName() ?>">
+                    </div>
+                </div>    
+                <?php } ?>
+            <?php endforeach; ?>
+            <?php if (!count($gallery_images)) { ?>
+                <div class="gallery-img" data-width="<?= $width ?>" data-height="<?= $height ?>"
+                    data-src="<?= $image_helper->getDefaultPlaceholderUrl('image'); ?>"
+                    data-bgset="<?= $image_helper->getDefaultPlaceholderUrl('image'); ?>"
+                    >
+                    <img class="product-image" src="<?= $image_helper->getDefaultPlaceholderUrl('image'); ?>"
+                        alt="<?= $_product->getName() ?>">
+                </div>
+            <?php } ?>
+        </div>
+        <div class="group_btns">
+            <button class="show_btn_pr_gallery my-tooltip-top">
+                <i class="las la-expand-arrows-alt"></i>
+                <span class="tt_txt tooltip-content no-wrap">Click to enlarge</span>
+            </button>
+        </div>
+    </div>
+</div>
+<script type="text/x-magento-init">
+{
+    "*": {
+        "Blueskytechco_CustomCatalog/js/customlayout": {
+        }
+    }
+}
+</script>

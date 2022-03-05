@@ -1,0 +1,43 @@
+<?php if ($detailedInfoGroup = $block->getGroupSortedChildNames('detailed_info', 'getChildHtml')) :?>
+    <div class="product info detailed tab-accordions">
+        <?php $layout = $block->getLayout(); ?>
+        <div class="product data items">
+            <?php foreach ($detailedInfoGroup as $key=>$name) :?>
+                <?php
+                $html = $layout->renderElement($name);
+                if (!trim($html)) {
+                    continue;
+                }
+                $alias = $layout->getElementAlias($name);
+                $label = $block->getChildData($alias, 'title');
+                ?>
+                <div class="panel entry-content clicked_accordion" id="tab_pr_description-<?= $key ?>">
+                    <div class="data item title"
+                        id="tab-label-<?= $block->escapeHtmlAttr($alias) ?>">
+                        <a class="data switch"
+                            href="javascript:;"
+                            id="tab-label-<?= $block->escapeHtmlAttr($alias) ?>-title"
+                            >
+                            <span class="txt_h_tab"><?= /* @noEscape */ $label ?></span>
+                            <span class="nav_link_icon ml__5"></span>
+                        </a>
+                    </div>
+                    <div class="data item content"
+                        id="<?= $block->escapeHtmlAttr($alias) ?>" style="display: none;"
+                        >
+                        <?= /* @noEscape */ $html ?>
+                    </div>
+                </div>
+                <?php $show_panel = false; ?>
+            <?php endforeach;?>
+        </div>
+    </div>
+    <script type="text/x-magento-init">
+        {
+            "*": {
+                "Blueskytechco_CustomCatalog/js/customlayout": {
+                }
+            }
+        }
+    </script>
+<?php endif; ?>

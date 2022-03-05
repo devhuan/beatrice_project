@@ -3124,6 +3124,8 @@
 
 .filter-content{
 	.filter-options{
+		display: flex;
+		justify-content: space-between;
 		.filter-options-title{
 			font-size: 18px;
 			color: @darkcolor;
@@ -3135,6 +3137,10 @@
 			display: block;
 		}
 		.filter-options-content{
+			.swatch-attribute{
+				display: flex;
+    			flex-direction: column;
+			}
 			ol{
 				li{
 					padding: 0 0 5px;
@@ -3430,7 +3436,7 @@
 	.breadcrumbs{
 		max-width: 100%;
 		margin-bottom: 0;
-		padding: 30px 0 50px 0;
+		padding: 30px 0 10px 0;
 		text-align: left;
 		.breadcrumbs{
 			padding: 0;
@@ -3456,10 +3462,11 @@
 			margin: 0;
 		}
 	}
-	.swatch-attribute.size .swatch-option{
+	.swatch-attribute.size .swatch-option.selected{
 		background-color: #fff;
-		border: 1px solid @bordercolor;
-		border-radius: 50%;
+	}
+	.swatch-attribute.size.text{
+		background: none !important;
 	}
 	.page-footer{
 		margin-top: 60px; 
@@ -3517,6 +3524,7 @@
 }
 .product-view .product-info-main, #quick-window{
 	.box-tocart{
+		width: 100%;
 		.fieldset{
 			.qty{
 				padding: 0 14px;
@@ -3544,8 +3552,13 @@
 			}
 		}
 		.actions{
+			display: block;
+			.action{
+				padding: 14px 0;
+				border-radius: 0;
+				width: 100%;
+			}
 			.action.tocart{
-				border-radius: 30px;
 				text-transform: capitalize;
 				&:before{
 					content: "+";
@@ -3603,8 +3616,12 @@
 		.product-reviews-summary{
 			display: inline-block;
 			margin: 0;
-			margin-top: 15px;
+			margin-top: 5px;
 			.reviews-actions{
+				a{
+					font-weight: @headingfontweight;
+					color: @darkcolor;
+				}
 				.action.view{
 					padding: 0 15px 0 12px;
 					border: 1px solid #dedede;
@@ -3640,7 +3657,7 @@
 			}
 		}
 		.price-box.price-final_price{
-			margin: 32px 0 18px 0;
+			margin: 8px 0 14px 0;
 		}
 		.product.attribute.overview{
 			.value{
@@ -3680,10 +3697,11 @@
 			}
 			.price-wrapper {
 				.price {
-					font-size: 24px;
+					font-size: 20px;
 					font-weight: normal;
 					font-family: @pricefont;
-					color: #888888;
+					color: @darkcolor;
+					font-weight: @headingfontweight;
 				}
 			}
 		}
@@ -3706,7 +3724,7 @@
 				 span{
 					text-transform: none;
 					font-size: 30px;
-					font-weight: @regularfontweight;
+					font-weight: @headingfontweight;
 					color: @darkcolor;
 					padding-bottom: 5px;
 					margin-bottom: 0;
@@ -3898,8 +3916,7 @@
 .product-social-links{
 	text-align: left;
 	margin-bottom: 30px;
-    padding-bottom: 35px;
-    border-bottom: 1px solid @bordercolor;
+    padding-bottom: 20px;
 	.product-addto-links, .mailto{
 		display: inline-block;
 	}
@@ -4783,21 +4800,28 @@
 	margin-bottom: 35px;
 	.product.data.items{
 	    float: none;
-	    text-align: center;
 	    max-width: 1300px;
 	    margin: auto;
+		.panel{
+			border: none !important;
+			box-shadow: none !important;
+		}
+		.active{
+			color: @darkcolor;
+			.nav_link_icon{
+				transform: rotateZ(90deg);
+			}
+			
+		}
 		.item.title{
-		    display: inline-block;
-		    text-align: center;
 		    cursor: pointer;
 		    float: none;
 		    padding: 0;
 		    height: auto;
 		    position: inherit;
-		    margin: 0 15px;
 		    position: relative;
 		    padding-bottom: 5px;
-	        border-bottom: 2px solid transparent;
+			border-bottom: 2px solid #f3f3f3;
 			-webkit-transition: all 300ms ease;
 			-moz-transition: all 300ms ease;
 			-ms-transition: all 300ms ease;
@@ -4805,9 +4829,11 @@
 			transition: all 300ms ease;
 		    &.active{
 		    	color: @darkcolor;
+				.nav_link_icon{
+					transform: rotateZ(90deg);
+				}
 		    }
 		    &:hover,&.active{
-		    	border-color: @headingcolor;
 		    	a{
 		    		color: @darkcolor;
 		    		&:before{
@@ -4816,8 +4842,11 @@
 		    	}
 		    }
 			a{
-				color: #828282;
-			    font-size: 20px;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				color: @darkcolor;
+			    font-size: 16px;
 			    font-family: @headingfont;
 			    padding: 0;
 			    font-weight: normal;
@@ -4832,7 +4861,12 @@
 			    		content: ")";
 			    	}
 			    }
+				.nav_link_icon::before{
+					content: "\f105";
+					font-family: 'FontAwesome';
+				}
 			}
+			
 		}
 		.item.content{
 			border: 0;
@@ -4869,6 +4903,9 @@
 				}
 				.data{
 					line-height: 1;
+					&.table{
+						border-bottom: 2px solid #f3f3f3;
+					}
 				}
 			}
 		}
@@ -6125,6 +6162,40 @@
 		display: -ms-flexbox;      /* TWEENER - IE 10 */
 		display: -webkit-flex;     /* NEW - Chrome */        /* NEW, Spec - Opera 12.1, Firefox 20+ */
 		flex-flow: wrap;
+		position: relative;
+		.swatch-option.selected{
+			outline: none !important;
+				&::after{
+				content: '';
+				width: 100%;
+				height: 2px;
+				position: absolute;
+				left: 0;
+				bottom: -10px;
+				background-color: #222 !important;
+			
+			}
+		}
+		
+		.swatch-option.text{
+			background: none !important;
+		}
+		.swatch-option.text .swatch-option{
+			background: none !important;
+		}
+		.swatch-option.text.selected{
+			border: none !important;
+			&::after{
+				bottom: -2px !important;
+			}
+			
+		}
+		.swatch-option.color:hover{
+			outline: none !important;
+		}
+		.swatch-option:focus{
+			box-shadow: none;
+		}
 	}
 	&.color {
 		padding-bottom: 10px;
@@ -6136,66 +6207,45 @@
 			}
 		}
 		.swatch-option {
-			width: 25px;
+			width: 80px;
 			min-width: auto;
-			height: 25px;
+			height: 20px;
 			border-color: #f1f1f1 !important;
-			border-radius: 100%;
 			position: relative;
 			overflow: visible;
 		    margin: 0 10px 10px 0;
+			&.text{
+				background: none !important;
+			}
 			&:hover{
 				text-decoration: none;
-				outline: 0;
+				
 			}
 			&.color.white {
 				border: 1px solid #ddd;
-				&:hover {
-					border: 1px solid #ddd;
-				}
 			}
+			
 		}	
 	}
 	&.size{
 		.text{
 			display: block;
-			width: 40px;
-			height: 40px;
-			line-height: 40px;
 			color: @headingcolor;
-			font-size: 12px;
+			font-size: 14px;
 			font-weight: @headingfontweight;
 			text-align: center;
-			background-color: #f1f1f1;
-			border-radius: 50%;
+			overflow: visible;
 			padding: 0;
 			border: 0;
 		.transition();
 			&:hover{
-				color: @lightcolor;
-				background-color: @linkshover;
-				outline: 0;
+				color: #c6c6c6;
 			}
 		}	
 	}
-	.swatch-option{
-		&.text{
-			&.selected{
-				background-color: @linkshover !important;
-				outline: 0;
-				color: @lightcolor !important;
-			}
-		}
-	}
 }
-.swatch-option{
-	&.text{
-		&.selected{
-			background-color: @linkshover !important;
-			outline: 0;
-			color: @lightcolor;
-		}
-	}
+.swatch-option:not(.disabled):hover{
+	outline: none !important;
 }
 .swatch-option-tooltip {
 	border: 1px solid #ddd !important;

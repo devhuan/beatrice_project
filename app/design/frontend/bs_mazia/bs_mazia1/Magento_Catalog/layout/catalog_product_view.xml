@@ -36,12 +36,11 @@
 					<container name="product.view.row" htmlTag="div" htmlClass="row">
 						<container name="product.col.left" htmlTag="div" htmlClass="col-md-12 col-xs-12">
 							<container name="product.row.child" htmlTag="div" htmlClass="row col-products">
-								<container name="product.col.media" htmlTag="div" htmlClass="product-media-image" before="-">
-									<container name="product.info.media" htmlTag="div" htmlClass="col-md-6 col-sm-6 col-xs-12 product-media">
-										<block class="Magento\Catalog\Block\Product\View\Gallery" name="product.info.media.image" template="product/view/gallery.phtml"/>
+								<container name="product.col.media" htmlTag="div" htmlClass="col-md-9 col-sm-9 col-xs-12 product-media-image" before="-">
+									<container name="product.info.media" htmlTag="div" htmlClass="product-media">
 									</container>
 								</container>
-								<container name="product.col.info" htmlTag="div" htmlClass="col-md-6 col-sm-6 col-xs-12">
+								<container name="product.col.info" htmlTag="div" htmlClass="col-md-3 col-sm-3 col-xs-12">
 									<container name="product.info.main" htmlTag="div" htmlClass="product-info product-info-main">
 										<container name="box.inner1" htmlTag="div" htmlClass="box-inner1" before="-">
 											<block class="Magento\Catalog\Block\Product\View\Description" name="product.info.overview" template="product/view/attribute.phtml" group="detailed_info" after="product.info.review">
