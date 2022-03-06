@@ -1,8 +1,8 @@
-cd htdo@media (min-width: 768px){
+@media (min-width: 768px){
     .custommenu.navigation {
         > ul {
             position: relative;
-
+            
             &:after {
                 display: table;
                 content: '';
@@ -52,7 +52,7 @@ cd htdo@media (min-width: 768px){
                 li > a > span > span.cat-label {
                     top: 3px;
                     right: -35px;
-
+                    
                     &:before {
                         left: -6px;
                         bottom: 3px;
@@ -88,7 +88,7 @@ cd htdo@media (min-width: 768px){
             &.columns2 {
                 > li {
                     width: 50%;
-
+                    
                     &:nth-child(2n+1) {
                         clear: both;
                     }
@@ -97,7 +97,7 @@ cd htdo@media (min-width: 768px){
             &.columns3 {
                 > li {
                     width: 33.33%;
-
+                    
                     &:nth-child(3n+1) {
                         clear: both;
                     }
@@ -106,7 +106,7 @@ cd htdo@media (min-width: 768px){
             &.columns4 {
                 > li {
                     width: 25%;
-
+                    
                     &:nth-child(4n+1) {
                         clear: both;
                     }
@@ -115,7 +115,7 @@ cd htdo@media (min-width: 768px){
             &.columns5 {
                 > li {
                     width: 20%;
-
+                    
                     &:nth-child(5n+1) {
                         clear: both;
                     }
@@ -124,7 +124,7 @@ cd htdo@media (min-width: 768px){
             &.columns6 {
                 > li {
                     width: 16.66%;
-
+                    
                     &:nth-child(6n+1) {
                         clear: both;
                     }
@@ -171,7 +171,7 @@ cd htdo@media (min-width: 768px){
             > a > span.cat-label {
                 top: 0;
                 right: 14px;
-
+                
                 &:before {
                     left: 3px;
                     bottom: -6px;
@@ -197,7 +197,7 @@ cd htdo@media (min-width: 768px){
             }
             &.fl-right {
                 float: right;
-
+                
                 &.staticwidth {
                     .submenu {
                         left: auto;
@@ -213,7 +213,7 @@ cd htdo@media (min-width: 768px){
             .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
                 padding-left: 5px;
                 padding-right: 5px;
-            }
+            }            
             .submenu {
                 display: block;
                 overflow: hidden;
@@ -248,8 +248,8 @@ cd htdo@media (min-width: 768px){
                     line-height: 30px;
                     display: block;
                     font-size: 14px;
-                    padding: 0;
-                    text-decoration: none;
+                    padding: 0;         
+                    text-decoration: none;           
                     span{
                         font-weight: 400;
                         font-size: 14px;
@@ -265,12 +265,12 @@ cd htdo@media (min-width: 768px){
                         }
                         span{
                             text-decoration: none !important;
-                        }
+                        }                        
                     }
                 }
                 > ul {
                     margin-top: 0;
-
+                    
                     &:before, &:after {
                         display: none;
                     }
@@ -312,7 +312,7 @@ cd htdo@media (min-width: 768px){
                     .menu-bottom-block .menu-bottom-block{
                         padding: 0 40px;
                     }
-                }
+                }               
             }
             &.fullwidth, &.staticwidth {
                 .submenu {
@@ -367,7 +367,7 @@ cd htdo@media (min-width: 768px){
                     .menu-top-block, .menu-left-block, .menu-right-block, .menu-bottom-block {
                         a {
                             display: inline;
-
+                            
                             &:hover {
                                 color: #78b7c6;
                                 text-decoration: none;
@@ -376,7 +376,7 @@ cd htdo@media (min-width: 768px){
                         a.btn-default {
                             background-color: #08c;
                             color: @lightcolor;
-
+                            
                             &:hover, &:focus {
                                 background-color: #08c;
                                 color: @lightcolor;
@@ -390,7 +390,7 @@ cd htdo@media (min-width: 768px){
                      }
                 }
             }
-            &.classic {
+            &.classic {              
                 .submenu {
                     > .row {
                     margin: 0;
@@ -401,7 +401,7 @@ cd htdo@media (min-width: 768px){
                         padding: 0;
                         padding-left: 0 !important;
                         padding-right: 20px;
-                        border-right: 0 !important;
+                        border-right: 0 !important; 
                         a{
                             span{
                                 font-weight: 400;
@@ -413,9 +413,9 @@ cd htdo@media (min-width: 768px){
                     left: 0;
                 }
                 .subchildmenu {
-                    min-width: 230px;
+                    min-width: 230px;    
                     padding-left: 20px;
-                    padding-right: 0;
+                    padding-right: 0;            
                     .subchildmenu {
                         visibility: hidden;
                         opacity: 0;
@@ -484,13 +484,13 @@ cd htdo@media (min-width: 768px){
             li {
                 margin: 0;
                 position: relative;
-
+                
                 &.level0 {
                     display: block;
                     position: relative;
                     border-radius: 0;
                     margin: 0;
-
+                    
                     &.parent > a:after {
                         content: '\f801';
                         display: inline-block;
@@ -500,7 +500,7 @@ cd htdo@media (min-width: 768px){
                         line-height: 41px;
                         float: right;
                     }
-
+                    
                     &.classic .submenu li.parent > a:after {
                         content: '\f801';
                         display: inline-block;
@@ -531,14 +531,14 @@ cd htdo@media (min-width: 768px){
                         line-height: 41px;
                         font-weight: 400;
                         font-size: 14px;
-
+                        
                         > span.cat-label {
                             position: relative;
                             margin-left: 10px;
                             padding: 0 2px;
                             top: 0;
                             right: 0;
-
+                            
                             &:before {
                                 left: -6px;
                                 top: 3px;
@@ -567,7 +567,7 @@ cd htdo@media (min-width: 768px){
                     }
                     &:hover {
                         background-color: #08c;
-
+                        
                         & > a {
                             color: @lightcolor;
                             border-top-color: #08c;
@@ -647,10 +647,10 @@ cd htdo@media (min-width: 768px){
   min-height: 55px;
   z-index: 9999;
   position: relative;
-  .navigation{
+  .navigation{ 
     background: transparent;
   }
-}
+} 
 .nav-sections{
   background: transparent;
   margin-bottom: 0;
@@ -901,12 +901,12 @@ cd htdo@media (min-width: 768px){
                             span{
                                  color: @primarycolor;
                                  padding-left: 10px;
-                            }
+                            }                        
                         }
                     }
                 }
             }
-            &:last-child{
+            &:last-child{ 
                 border: none;
             }
         }
@@ -945,14 +945,14 @@ cd htdo@media (min-width: 768px){
 }
 .top-block-menu h6{
   text-transform: none;
-  color: #333333;
+  color: #333333; 
   font-size: 17px;
   margin-bottom: 5px;
 }
 
 @media (max-width: 991px) and (min-width:768px) {
     .custommenu.navigation li.level0.staticwidth .submenu li.level1 > a:before,
-    .custommenu.navigation li.level0.fullwidth .submenu a:before,
+    .custommenu.navigation li.level0.fullwidth .submenu a:before, 
     .custommenu.navigation li.level0.staticwidth .submenu a:before {
         display: none;
     }
@@ -997,7 +997,7 @@ cd htdo@media (min-width: 768px){
         border-radius: 2px;
         line-height: 1;
         color: @lightcolor;
-
+        
         &:before {
             content: "";
             position: absolute;
@@ -1030,14 +1030,14 @@ cd htdo@media (min-width: 768px){
         }
     }
     .nav-sections{
-        width: 100%;
+        width: 100%; 
         left: calc(-1 * (100% - 0px));
         background-color: @bkgheader;
         .nav-sections-item-title{
             display: none;
         }
         .nav-sections-item-content{
-            margin-top: 0;
+            margin-top: 0; 
             padding-top: 0;
         }
         &.nav-open{
@@ -1047,10 +1047,10 @@ cd htdo@media (min-width: 768px){
             padding: 25px 0 0;
         }
     }
-    .custommenu.navigation{
-        float: none;
+    .custommenu.navigation{  
+        float: none; 
         max-width: 100%;
-        padding: 0;
+        padding: 0; 
         > ul{
             padding: 0 30px;
             .subchildmenu{
@@ -1059,7 +1059,7 @@ cd htdo@media (min-width: 768px){
             }
         }
         li.level0{
-            margin-right: 0 !important;
+            margin-right: 0 !important; 
             border: 0;
             > .level-top{
                 display: block;
@@ -1096,13 +1096,13 @@ cd htdo@media (min-width: 768px){
                             display: none;
                         }
                     }
-
-                }
+                    
+                }                
             }
             &.fullwidth, &.staticwidth{
                 left: auto !important;
                 padding: 0 !important;
-                right: auto !important;
+                right: auto !important; 
                 max-width: 100% !important;
                 .submenu{
                     a{
@@ -1125,7 +1125,7 @@ cd htdo@media (min-width: 768px){
                 }
             }
             .submenu{
-                 box-shadow: none;
+                 box-shadow: none; 
                  padding-top: 0;
                  border-radius: 0 !important;
                 border: 0 !important;
@@ -1142,12 +1142,12 @@ cd htdo@media (min-width: 768px){
                     font-family: @bdf;
                  }
             }
-        }
+        } 
          li, li.level0{
             &.parent{
                 > a{
                     &:after{
-                        display: block;
+                        display: block; 
                         position: absolute;
                         top: 14px;
                         font-family: 'icomoon' !important;
@@ -1158,13 +1158,13 @@ cd htdo@media (min-width: 768px){
                     }
                 }
             }
-        }
+        } 
         .ui-menu-item.level0{
             > .open-children-toggle{
                     right: -15px !important;
                     top: 8px !important;
             }
-        }
+        } 
         .parent{
             .level-top:after{
                 right: 25px;

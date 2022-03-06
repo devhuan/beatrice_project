@@ -67,6 +67,8 @@ define([
                         $(this).closest('.clicked_accordion').removeClass('active');
                         $(this).closest('.clicked_accordion').find('.data.content').slideUp(300);
                     } else {
+                        $('.clicked_accordion').find('.data.content').slideUp(300);
+                        $('.clicked_accordion').removeClass('active');
                         $(this).closest('.clicked_accordion').addClass('active');
                         $(this).closest('.clicked_accordion').find('.data.content').slideDown(300);
                     }

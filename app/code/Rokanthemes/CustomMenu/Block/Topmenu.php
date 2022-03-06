@@ -126,7 +126,7 @@ class Topmenu extends \Magento\Framework\View\Element\Template
        
         return $html;
     }
-    public function getSubmenuItemsHtml($children, $level = 1, $max_level = 0, $column_width=12, $menu_type = 'fullwidth', $columns = null)
+    public function getSubmenuItemsHtml($children, $level = 1, $max_level = 0, $column_width=12, $menu_type = 'fullwidth', $columns = null, $image_url = null)
     {
         $html = '';
         
@@ -136,7 +136,11 @@ class Topmenu extends \Magento\Framework\View\Element\Template
                 $column_class = "col-sm-".$column_width." ";
                 $column_class .= "mega-columns columns".$columns;
             }
-            $html = '<ul class="subchildmenu '.$column_class.'">';
+            $html = '<ul class="subchildmenu sub-level-'.$level.' '.$column_class.'">';
+            $children_count = count($children);
+            $float_item = round($children_count/2);
+            $i = 1; 
+            $item = 1;
             foreach($children as $child) {
                 $cat_model = $this->getCategoryModel($child->getId());
                 
@@ -145,19 +149,25 @@ class Topmenu extends \Magento\Framework\View\Element\Template
                 if (!$rt_menu_hide_item) {
                     $sub_children = $this->getActiveChildCategories($child);
                     $custom_style = '';
-                    if($cat_model->getData('rt_menu_bg_img') != ''){
-                         $custom_style = "background-image: url('" .$cat_model->getImageUrl('rt_menu_bg_img'). "');";
-                         $custom_style = ' style="'.$custom_style.'"';
-                    }
                     
                     $rt_menu_cat_label = $cat_model->getData('rt_menu_cat_label');
                     $rt_menu_icon_img = $cat_model->getData('rt_menu_icon_img');
                     $rt_menu_font_icon = $cat_model->getData('rt_menu_font_icon');
-
+                    if ($level == 1) {
+                        if ($i == 1 || $i == ($float_item + 1)) {
+                            $html .= '<div class="row-category-'.$item.'"><ul>';
+                            $item++;
+                        }
+                    }
+                    $url_image_data = '';
+                    if($cat_model->getImageUrl('rt_menu_bg_img')){
+                        $url_image_data = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_WEB).''.$cat_model->getImageUrl('rt_menu_bg_img');
+                    }
+                    
                     $item_class = 'level'.$level.' ';
                     if(count($sub_children) > 0)
                         $item_class .= 'parent ';
-                    $html .= '<li class="ui-menu-item '.$item_class.'"'.$custom_style.'>';
+                    $html .= '<li class="ui-menu-item '.$item_class.'"'.$custom_style.' data-image="'.$url_image_data.'">';
                     if(count($sub_children) > 0) {
                         $html .= '<div class="open-children-toggle"></div>';
                     }
@@ -174,9 +184,24 @@ class Topmenu extends \Magento\Framework\View\Element\Template
                         $html .= '<span class="cat-label cat-label-'.$rt_menu_cat_label.'">'.$this->_custommenuConfig['cat_labels'][$rt_menu_cat_label].'</span>';
                     $html .= '</span></a>';
                     if(count($sub_children) > 0) {
-                        $html .= $this->getSubmenuItemsHtml($sub_children, $level+1, $max_level, $column_width, $menu_type);
+                        $html .= $this->getSubmenuItemsHtml($sub_children, $level+1, $max_level, $column_width, $menu_type, null);
                     }
                     $html .= '</li>';
+                    if ($level == 1) {
+                        if ($i == $float_item || $i == $children_count) {
+                            $html .= '</ul></div>';
+                        }
+                        if($i == $float_item ){
+                            $html .= '<div class="image-categoty-menu">';
+                                $html .= '<img class="image" src="'.$this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_WEB).$image_url.'" alt="">';
+                            $html .= '</div>';
+                        }
+                        if ($children_count == 1) {
+                            $html .= '<div class="row-category-2">';
+                            $html .= '</div>';
+                        }
+                        $i++;
+                    }
                 }
             }
             $html .= '</ul>';
@@ -222,9 +247,6 @@ class Topmenu extends \Magento\Framework\View\Element\Template
                     
                 $custom_style = '';
                 $css_fixed = array();
-                if($cat_model->getData('rt_menu_bg_img') != ''){
-                     $css_fixed[] = "background-image: url('" .$cat_model->getImageUrl('rt_menu_bg_img'). "')";
-                }
                 if($menu_type=="staticwidth")
                     $css_fixed[] = 'width: 500px';
 
@@ -235,7 +257,10 @@ class Topmenu extends \Magento\Framework\View\Element\Template
                 if(!empty($css_fixed)){
                     $custom_style = 'style="'.implode("; ", $css_fixed).'"';
                 }
-                    
+                $url_image_data = '';
+                if($cat_model->getImageUrl('rt_menu_bg_img')){
+                    $url_image_data = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_WEB).''.$cat_model->getImageUrl('rt_menu_bg_img');
+                }    
                 $item_class = 'level0';
                 $item_class .= ' '.$menu_type;
                 
@@ -256,7 +281,7 @@ class Topmenu extends \Magento\Framework\View\Element\Template
 				}
                 if(count($children) > 0 || (($menu_type=="fullwidth" || $menu_type=="staticwidth") && ($menu_top_content || $menu_left_content || $menu_right_content || $menu_bottom_content)))
                     $item_class .= ' parent';
-                $html .= '<li class="ui-menu-item '.$item_class.$rt_menu_float_type.'">';
+                $html .= '<li class="ui-menu-item '.$item_class.$rt_menu_float_type.'" data-image="'.$url_image_data.'">';
                 if(count($children) > 0) {
                     $html .= '<div class="open-children-toggle"></div>';
                 }
@@ -279,7 +304,7 @@ class Topmenu extends \Magento\Framework\View\Element\Template
                         if(($menu_type=="fullwidth" || $menu_type=="staticwidth") && $menu_left_content && $menu_left_width > 0) {
                             $html .= '<div class="menu-left-block col-sm-'.$menu_left_width.'">'.$this->getBlockContent($menu_left_content).'</div>';
                         }
-                        $html .= $this->getSubmenuItemsHtml($children, 1, $max_level, 12-$menu_left_width-$menu_right_width, $menu_type, $rt_menu_cat_columns);
+                        $html .= $this->getSubmenuItemsHtml($children, 1, $max_level, 12-$menu_left_width-$menu_right_width, $menu_type, $rt_menu_cat_columns, $cat_model->getImageUrl('rt_menu_bg_img'));
                         if(($menu_type=="fullwidth" || $menu_type=="staticwidth") && $menu_right_content && $menu_right_width > 0) {
                             $html .= '<div class="menu-right-block col-sm-'.$menu_right_width.'">'.$this->getBlockContent($menu_right_content).'</div>';
                         }

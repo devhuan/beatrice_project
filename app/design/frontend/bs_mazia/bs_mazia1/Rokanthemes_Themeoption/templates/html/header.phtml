@@ -51,11 +51,28 @@
 				}
 			});
             <?php } ?>
-            $(document).on("click",".col-custommenu .toggle-icon",function() {
+            $('.col-custommenu .toggle-icon').unbind("click").on( "click", function() {                
                 if ($('.col-custommenu').hasClass('active')) {
                     $('.col-custommenu').removeClass('active');
                 }else{
                     $('.col-custommenu').addClass('active');
+                }
+            });
+            $( "li.ui-menu-item" ).mouseenter(function() {
+                var image = $( this ).data( "image" );
+                if (image) {
+                    if ($( this ).hasClass('level0')) {
+                        if ($( this ).hasClass('fullwidth')) {
+                            $( this ).find('.image-categoty-menu .image').attr("src", image);
+                        }
+                    } else {
+                        $( this ).closest('.level0').find('.image-categoty-menu .image').attr("src", image);
+                    }
+                }else{
+                    var image_main = $( this ).closest('.level0').find('.level1').data( "image" );
+                    if(image_main){
+                        $( this ).closest('.level0').find('.image-categoty-menu .image').attr("src", image_main);
+                    }
                 }
             });
 		});
